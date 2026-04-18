@@ -3,8 +3,27 @@ extends CharacterBody3D
 
 @export var move_speed := 5.0
 @export var move_acceleration := 20.0
-@export var jump_speed := 5.0
+@export var jump_speed := 7.0
 
+@export var mouse_sensitivity := 0.002
+
+var pitch := 0.0
+
+func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
+
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+
+	if event is InputEventMouseMotion:
+		rotate_y(-event.relative.x * mouse_sensitivity)
+
+		pitch -= event.relative.y * mouse_sensitivity
+		pitch = clamp(pitch, deg_to_rad(-90), deg_to_rad(90))
+
+		$CameraPivot.rotation.x = pitch
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
