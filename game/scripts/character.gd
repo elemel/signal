@@ -13,23 +13,9 @@ var ping_time := -1000.0
 var ping_origin := Vector3.ZERO
 
 
-func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
-
 func _input(event):
-	if event.is_action_pressed("ui_cancel"):
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		else:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
 	if event is InputEventMouseButton and event.pressed:
-		ping_time = Time.get_ticks_msec() / 1000.0
-		ping_origin = $CameraPivot.global_position
-
-		echo_material.set_shader_parameter("ping_time", ping_time)
-		echo_material.set_shader_parameter("ping_origin", ping_origin)
+		ping()
 
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * mouse_sensitivity)
@@ -62,3 +48,11 @@ func _physics_process(delta: float) -> void:
 		velocity.z = ground_velocity.y
 
 	move_and_slide()
+
+
+func ping() -> void:
+	ping_time = Time.get_ticks_msec() / 1000.0
+	ping_origin = $CameraPivot.global_position
+
+	echo_material.set_shader_parameter("ping_time", ping_time)
+	echo_material.set_shader_parameter("ping_origin", ping_origin)
