@@ -5,7 +5,9 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_l6cod")
-shader_parameter/ping_origin = Vector3(0, 0, 0)
-shader_parameter/ping_time = -1000.0
+shader_parameter/ping_positions = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/ping_times = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/ping_count = 0
 shader_parameter/wave_speed = 5.0
 shader_parameter/wave_width = 0.5
+shader_parameter/debug = 1.0
