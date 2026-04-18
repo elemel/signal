@@ -1,11 +1,17 @@
 [gd_scene format=3 uid="uid://ibawgjup5jyb"]
 
+[ext_resource type="Script" uid="uid://dj1lemnmejakc" path="res://scripts/level.gd" id="1_qwf4p"]
 [ext_resource type="Script" uid="uid://bmt2s8jnt8xo7" path="res://scripts/spawner.gd" id="1_r5dgx"]
 [ext_resource type="PackedScene" uid="uid://dwmvaje7oyxmi" path="res://scenes/player_character.tscn" id="2_v8w5n"]
 [ext_resource type="Material" uid="uid://doaqtoc3f68k7" path="res://materials/echo.tres" id="3_qwf4p"]
 [ext_resource type="Script" uid="uid://cbbxerjy6ubho" path="res://scripts/pinger.gd" id="4_r5dgx"]
+[ext_resource type="Script" uid="uid://d2ome5x6xlrsw" path="res://scripts/goal.gd" id="5_v8w5n"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r5dgx"]
+size = Vector3(3, 3, 3)
 
 [node name="LevelA" type="Node3D" unique_id=557498288]
+script = ExtResource("1_qwf4p")
 
 [node name="Spawner" type="Node3D" parent="." unique_id=1921607871]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0095358, -0.05435443, 10.978868)
@@ -62,3 +68,14 @@ operation = 2
 use_collision = true
 size = Vector3(3, 3, 15)
 material = ExtResource("3_qwf4p")
+
+[node name="Goal" type="Area3D" parent="." unique_id=678407286 node_paths=PackedStringArray("level")]
+transform = Transform3D(0.9604348, 0, 0.27850503, 0, 1, 0, -0.27850503, 0, 0.9604348, -5.9015045, 0, -8.223862)
+script = ExtResource("5_v8w5n")
+level = NodePath("..")
+next_level_name = "level_a"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Goal" unique_id=133118476]
+shape = SubResource("BoxShape3D_r5dgx")
+
+[connection signal="body_entered" from="Goal" to="Goal" method="_on_body_entered"]
