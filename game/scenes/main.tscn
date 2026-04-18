@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bflbn4pr7gko3"]
+
+[ext_resource type="Script" uid="uid://cq7iko6e6hkl8" path="res://scripts/character.gd" id="1_o5qli"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sgp6g"]
+
+[node name="Main" type="Node3D" unique_id=207641871]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1642880060]
+transform = Transform3D(12.505366, 0, 0, 0, 1, 0, 0, 0, 12.26446, 0, -0.4918872, 0)
+use_collision = true
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=661056741]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7020446, 0)
+script = ExtResource("1_o5qli")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1874521602]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29368412, 0)
+shape = SubResource("CapsuleShape3D_sgp6g")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=1479362642]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="CharacterBody3D" unique_id=895731894]
