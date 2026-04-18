@@ -3,45 +3,62 @@
 [ext_resource type="Script" uid="uid://bmt2s8jnt8xo7" path="res://scripts/spawner.gd" id="1_r5dgx"]
 [ext_resource type="PackedScene" uid="uid://dwmvaje7oyxmi" path="res://scenes/player_character.tscn" id="2_v8w5n"]
 [ext_resource type="Material" uid="uid://doaqtoc3f68k7" path="res://materials/echo.tres" id="3_qwf4p"]
-[ext_resource type="Shader" uid="uid://bkdt1bfpqv5xy" path="res://shaders/echo.gdshader" id="4_ebk0e"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sugp2"]
-render_priority = 0
-shader = ExtResource("4_ebk0e")
-shader_parameter/ping_origin = Vector3(0, 0, 0)
-shader_parameter/ping_time = 0.0
-shader_parameter/wave_speed = 5.0
-shader_parameter/wave_width = 0.5
-shader_parameter/debug = 1.0
+[ext_resource type="Script" uid="uid://cbbxerjy6ubho" path="res://scripts/pinger.gd" id="4_r5dgx"]
 
 [node name="LevelA" type="Node3D" unique_id=557498288]
 
 [node name="Spawner" type="Node3D" parent="." unique_id=1921607871]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0095358, -0.05435443, 10.978868)
 script = ExtResource("1_r5dgx")
 player_character_scene = ExtResource("2_v8w5n")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1287413909]
-transform = Transform3D(12.505366, 0, 0, 0, 5.8943276, 0, 0, 0, 12.26446, 0, 0, 0)
+[node name="StartPinger" type="Node3D" parent="." unique_id=1626833639]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.65984535, -0.2654791, 10.818781)
+script = ExtResource("4_r5dgx")
+color = Color(1, 0, 0, 1)
+
+[node name="GoalPinger" type="Node3D" parent="." unique_id=1335815159]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.3798776, -0.26548028, -8.819923)
+script = ExtResource("4_r5dgx")
+color = Color(0.0333333, 1, 0, 1)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=776319859]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1287413909]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5952244, 0)
 material_override = ExtResource("3_qwf4p")
 use_collision = true
+size = Vector3(20, 10, 30)
 material = ExtResource("3_qwf4p")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="CSGBox3D" unique_id=1400350602]
-transform = Transform3D(0.9141337, 0, 0, 0, 0.92876667, 0, 0, 0, 0.889537, 0, 0, 0)
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=309023499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.181533, 0)
+material_override = ExtResource("3_qwf4p")
+use_collision = true
+size = Vector3(20, 10, 30)
+material = ExtResource("3_qwf4p")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1400350602]
+transform = Transform3D(-0.20420541, 0, 0.978928, 0, 1, 0, -0.978928, 0, -0.20420541, 1.1535358, 0, 0.6996956)
 material_override = ExtResource("3_qwf4p")
 operation = 2
 use_collision = true
+size = Vector3(3, 3, 15)
 material = ExtResource("3_qwf4p")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1111199481]
-transform = Transform3D(1.7793005, -0.3817273, -0.47603667, 1.0317613, 0.7032978, 0.5858618, 0.13771486, -0.33712986, 1.761195, 1.789289, 0.21886066, 0.03894671)
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D" unique_id=459290258]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0095358, 0, 6.8717318)
 material_override = ExtResource("3_qwf4p")
+operation = 2
 use_collision = true
-material = SubResource("ShaderMaterial_sugp2")
+size = Vector3(3, 3, 10)
+material = ExtResource("3_qwf4p")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="." unique_id=989727052]
-transform = Transform3D(1.3726535, -0.6373893, 0.2555675, -1.178827, -0.3363583, 1.3856506, -0.98772264, -0.48435318, -1.2985799, -3.3760648, 0.21886066, 0.03894671)
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D" unique_id=384650529]
+transform = Transform3D(0.9932377, 0, 0.116098695, 0, 1, 0, -0.116098695, 0, 0.9932377, -5.5411196, 0, -2.5179715)
 material_override = ExtResource("3_qwf4p")
+operation = 2
 use_collision = true
-material = SubResource("ShaderMaterial_sugp2")
+size = Vector3(3, 3, 15)
+material = ExtResource("3_qwf4p")
