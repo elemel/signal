@@ -4,7 +4,7 @@ class_name PlayerCharacter
 @export var move_speed := 3.0
 @export var move_acceleration := 10.0
 @export var jump_speed := 5.0
-@export var ping_cooldown := 0.5
+@export var ping_cooldown := 1.0
 
 @export var mouse_sensitivity := 0.002
 @export var echo_material: ShaderMaterial
