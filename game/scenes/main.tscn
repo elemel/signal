@@ -1,55 +1,103 @@
 [gd_scene format=3 uid="uid://bflbn4pr7gko3"]
 
 [ext_resource type="Script" uid="uid://b602h0bhde36j" path="res://scripts/main.gd" id="1_sugp2"]
-[ext_resource type="PackedScene" uid="uid://ibawgjup5jyb" path="res://scenes/levels/level_a.tscn" id="2_0wfyh"]
 [ext_resource type="Material" uid="uid://doaqtoc3f68k7" path="res://materials/echo.tres" id="2_jyhfs"]
-[ext_resource type="Script" uid="uid://dfes40ur2tsiw" path="res://scripts/hud.gd" id="4_tbgi4"]
+[ext_resource type="Script" uid="uid://dfes40ur2tsiw" path="res://scripts/compass.gd" id="4_tbgi4"]
 [ext_resource type="Script" uid="uid://cfrxka87kii7r" path="res://scripts/pause_menu.gd" id="5_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://chtwre3p3tns1" path="res://scenes/levels/level_b.tscn" id="5_tefeu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_sugp2"]
 font_size = 50
+
+[sub_resource type="LabelSettings" id="LabelSettings_tbgi4"]
+font_size = 20
 
 [node name="Main" type="Node3D" unique_id=207641871 groups=["mains"]]
 script = ExtResource("1_sugp2")
 echo_material = ExtResource("2_jyhfs")
 
-[node name="PauseMenu" type="CanvasLayer" parent="." unique_id=1039877153 node_paths=PackedStringArray("hud")]
+[node name="Menu" type="CanvasLayer" parent="." unique_id=1039877153 node_paths=PackedStringArray("main", "compass_layer", "compass_button", "invert_mouse_button")]
 process_mode = 3
 script = ExtResource("5_tbgi4")
-hud = NodePath("../HUD")
+main = NodePath("..")
+compass_layer = NodePath("../Compass")
+compass_button = NodePath("CenterContainer/VBoxContainer/Compass")
+invert_mouse_button = NodePath("CenterContainer/VBoxContainer/InvertMouse")
 
-[node name="CenterContainer" type="CenterContainer" parent="PauseMenu" unique_id=649409549]
+[node name="CenterContainer" type="CenterContainer" parent="Menu" unique_id=649409549]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu/CenterContainer" unique_id=637207986]
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu/CenterContainer" unique_id=637207986]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="PauseMenu/CenterContainer/VBoxContainer" unique_id=2033329772]
+[node name="Title" type="Label" parent="Menu/CenterContainer/VBoxContainer" unique_id=2033329772]
 layout_mode = 2
-text = "Paused"
+text = "Chamber"
 label_settings = SubResource("LabelSettings_sugp2")
+horizontal_alignment = 1
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=651597960 node_paths=PackedStringArray("horizon_line")]
+[node name="Blank" type="Label" parent="Menu/CenterContainer/VBoxContainer" unique_id=272538576]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_tbgi4")
+horizontal_alignment = 1
+
+[node name="Start" type="Button" parent="Menu/CenterContainer/VBoxContainer" unique_id=1656852974]
+layout_mode = 2
+text = "Start"
+
+[node name="Compass" type="Button" parent="Menu/CenterContainer/VBoxContainer" unique_id=1884608513]
+layout_mode = 2
+text = "Compass: On"
+
+[node name="InvertMouse" type="Button" parent="Menu/CenterContainer/VBoxContainer" unique_id=933800742]
+layout_mode = 2
+text = "Invert Mouse: Off"
+
+[node name="Quit" type="Button" parent="Menu/CenterContainer/VBoxContainer" unique_id=1626178867]
+layout_mode = 2
+text = "Quit"
+
+[node name="Compass" type="CanvasLayer" parent="." unique_id=651597960 node_paths=PackedStringArray("horizon_line", "north_line", "east_line", "south_line", "west_line")]
 script = ExtResource("4_tbgi4")
-horizon_line = NodePath("ColorRect")
+horizon_line = NodePath("Horizon")
+north_line = NodePath("North")
+east_line = NodePath("East")
+south_line = NodePath("South")
+west_line = NodePath("West")
 
-[node name="ColorRect" type="ColorRect" parent="HUD" unique_id=1599479829]
-modulate = Color(1, 1, 1, 0.49803922)
-custom_minimum_size = Vector2(3, 3)
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_top = -0.5
-offset_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Horizon" type="Line2D" parent="Compass" unique_id=2144109995]
+modulate = Color(1, 1, 1, 0.2)
+points = PackedVector2Array(0, 0, 1152, 0)
+width = 1.0
+
+[node name="North" type="Line2D" parent="Compass" unique_id=572302760]
+modulate = Color(1, 1, 1, 0.2)
+points = PackedVector2Array(0, 0, 0, 652)
+width = 1.0
+default_color = Color(0, 1, 1, 1)
+
+[node name="East" type="Line2D" parent="Compass" unique_id=672753074]
+modulate = Color(1, 1, 1, 0.2)
+points = PackedVector2Array(0, 0, 0, 652)
+width = 1.0
+
+[node name="South" type="Line2D" parent="Compass" unique_id=1331115903]
+modulate = Color(1, 1, 1, 0.2)
+points = PackedVector2Array(0, 0, 0, 652)
+width = 1.0
+
+[node name="West" type="Line2D" parent="Compass" unique_id=1675165458]
+modulate = Color(1, 1, 1, 0.2)
+points = PackedVector2Array(0, 0, 0, 652)
+width = 1.0
 
 [node name="Levels" type="Node3D" parent="." unique_id=945481137]
 
-[node name="LevelA" parent="Levels" unique_id=557498288 instance=ExtResource("2_0wfyh")]
+[node name="LevelB" parent="Levels" unique_id=557498288 instance=ExtResource("5_tefeu")]
+
+[connection signal="pressed" from="Menu/CenterContainer/VBoxContainer/Compass" to="Menu" method="_on_compass_pressed"]
+[connection signal="pressed" from="Menu/CenterContainer/VBoxContainer/InvertMouse" to="Menu" method="_on_invert_mouse_pressed"]

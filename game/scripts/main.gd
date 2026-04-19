@@ -3,6 +3,8 @@ class_name Main
 
 @export var echo_material: ShaderMaterial
 
+var invert_mouse := false
+
 var _time := 0.0
 
 var _ping_times: PackedFloat32Array;
@@ -20,9 +22,17 @@ func _ready() -> void:
 	_ping_colors.resize(16)
 
 	_ping_times.fill(-1000.0)
+	_ping_colors.fill(Color.BLACK)
 
 	echo_material.set_shader_parameter("debug", 0.0)
 	update_material()
+
+
+func clear_pings() -> void:
+	_ping_times.fill(-1000.0)
+	_ping_positions.fill(Vector3.ZERO)
+	_ping_ranges.fill(0.0)
+	_ping_colors.fill(Color.BLACK)
 
 
 func add_ping(ping_position: Vector3, ping_range := 10.0, color := Color.WHITE) -> void:

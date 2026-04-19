@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://chtwre3p3tns1"]
+
+[ext_resource type="Script" uid="uid://dj1lemnmejakc" path="res://scripts/level.gd" id="1_rvbdc"]
+[ext_resource type="Script" uid="uid://bmt2s8jnt8xo7" path="res://scripts/spawner.gd" id="2_kgmh0"]
+[ext_resource type="PackedScene" uid="uid://dwmvaje7oyxmi" path="res://scenes/player_character.tscn" id="3_iptsh"]
+[ext_resource type="Script" uid="uid://cbbxerjy6ubho" path="res://scripts/pinger.gd" id="4_py1fy"]
+[ext_resource type="Material" uid="uid://doaqtoc3f68k7" path="res://materials/echo.tres" id="5_f1nyh"]
+[ext_resource type="Script" uid="uid://d2ome5x6xlrsw" path="res://scripts/goal.gd" id="6_txdcr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r5dgx"]
+size = Vector3(3, 3, 3)
+
+[node name="LevelB" type="Node3D" unique_id=557498288]
+script = ExtResource("1_rvbdc")
+
+[node name="Spawner" type="Node3D" parent="." unique_id=1921607871]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.302802, -0.05435443, 5.484394)
+script = ExtResource("2_kgmh0")
+player_character_scene = ExtResource("3_iptsh")
+
+[node name="StartPinger" type="Node3D" parent="Spawner" unique_id=1626833639]
+script = ExtResource("4_py1fy")
+color = Color(1, 0, 0, 1)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=776319859]
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1287413909]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5952244, 0)
+material_override = ExtResource("5_f1nyh")
+use_collision = true
+size = Vector3(20, 10, 30)
+material = ExtResource("5_f1nyh")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=309023499]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4.181533, 0)
+material_override = ExtResource("5_f1nyh")
+use_collision = true
+size = Vector3(20, 10, 30)
+material = ExtResource("5_f1nyh")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D" unique_id=459290258]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1396637, 0, -1.2850332)
+material_override = ExtResource("5_f1nyh")
+operation = 2
+use_collision = true
+size = Vector3(15, 3, 20)
+material = ExtResource("5_f1nyh")
+
+[node name="Goal" type="Area3D" parent="." unique_id=678407286 node_paths=PackedStringArray("level")]
+transform = Transform3D(0.9604348, 0, 0.27850503, 0, 1, 0, -0.27850503, 0, 0.9604348, -4.0509415, 0, -10.728833)
+script = ExtResource("6_txdcr")
+level = NodePath("..")
+next_level_name = "level_a"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Goal" unique_id=133118476]
+shape = SubResource("BoxShape3D_r5dgx")
+
+[node name="GoalPinger" type="Node3D" parent="Goal" unique_id=1335815159]
+script = ExtResource("4_py1fy")
+color = Color(0.0333333, 1, 0, 1)
+
+[connection signal="body_entered" from="Goal" to="Goal" method="_on_body_entered"]

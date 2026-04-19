@@ -73,7 +73,7 @@ material = ExtResource("3_qwf4p")
 transform = Transform3D(0.9604348, 0, 0.27850503, 0, 1, 0, -0.27850503, 0, 0.9604348, -5.9015045, 0, -8.223862)
 script = ExtResource("5_v8w5n")
 level = NodePath("..")
-next_level_name = "level_a"
+next_level_name = "level_b"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Goal" unique_id=133118476]
 shape = SubResource("BoxShape3D_r5dgx")

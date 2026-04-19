@@ -12,6 +12,7 @@ class_name PlayerCharacter
 var main: Main
 var pitch := 0.0
 var current_ping_cooldown := 0.0
+var ping_enabled := false
 
 
 func _ready() -> void:
@@ -22,7 +23,8 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		rotate_y(-event.relative.x * mouse_sensitivity)
 
-		pitch -= event.relative.y * mouse_sensitivity
+		var invert_mouse_scale := -1.0 if main.invert_mouse else 1.0
+		pitch -= invert_mouse_scale * event.relative.y * mouse_sensitivity
 		pitch = clamp(pitch, deg_to_rad(-90), deg_to_rad(90))
 
 		$CameraPivot.rotation.x = pitch
@@ -31,7 +33,10 @@ func _input(event):
 func _physics_process(delta: float) -> void:
 	current_ping_cooldown -= delta
 
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and current_ping_cooldown < 0.0:
+	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		ping_enabled = true
+
+	if ping_enabled and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and current_ping_cooldown < 0.0:
 		current_ping_cooldown = ping_cooldown * randf_range(0.9, 1.1)
 		ping()
 
