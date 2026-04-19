@@ -16,7 +16,7 @@ echo_material = ExtResource("2_jyhfs")
 levels = NodePath("Levels")
 menu = NodePath("Menu")
 
-[node name="Menu" type="CanvasLayer" parent="." unique_id=1039877153 node_paths=PackedStringArray("main", "compass_layer", "title_label", "move_label", "jump_label", "ping_label", "sticky_ping_label", "pause_label", "start_button", "resume_button", "continue_button", "compass_button", "invert_mouse_button", "quit_button", "exit_button")]
+[node name="Menu" type="CanvasLayer" parent="." unique_id=1039877153 node_paths=PackedStringArray("main", "compass_layer", "title_label", "move_label", "jump_label", "throw_flare_label", "pause_label", "start_button", "resume_button", "continue_button", "compass_button", "invert_mouse_button", "quit_button", "exit_button")]
 process_mode = 3
 script = ExtResource("5_tbgi4")
 main = NodePath("..")
@@ -24,8 +24,7 @@ compass_layer = NodePath("../Compass")
 title_label = NodePath("CenterContainer/VBoxContainer/Title")
 move_label = NodePath("CenterContainer/VBoxContainer/Move")
 jump_label = NodePath("CenterContainer/VBoxContainer/Jump")
-ping_label = NodePath("CenterContainer/VBoxContainer/Ping")
-sticky_ping_label = NodePath("CenterContainer/VBoxContainer/StickyPing")
+throw_flare_label = NodePath("CenterContainer/VBoxContainer/ThrowFlare")
 pause_label = NodePath("CenterContainer/VBoxContainer/Pause")
 start_button = NodePath("CenterContainer/VBoxContainer/Start")
 resume_button = NodePath("CenterContainer/VBoxContainer/Resume")
@@ -67,15 +66,9 @@ text = "Jump with Space Bar"
 label_settings = SubResource("LabelSettings_jyhfs")
 horizontal_alignment = 1
 
-[node name="Ping" type="Label" parent="Menu/CenterContainer/VBoxContainer" unique_id=458569738]
+[node name="ThrowFlare" type="Label" parent="Menu/CenterContainer/VBoxContainer" unique_id=458569738]
 layout_mode = 2
-text = "Ping with Left Mouse Button"
-label_settings = SubResource("LabelSettings_jyhfs")
-horizontal_alignment = 1
-
-[node name="StickyPing" type="Label" parent="Menu/CenterContainer/VBoxContainer" unique_id=2006434352]
-layout_mode = 2
-text = "Toggle Sticky Ping with Right Mouse Button"
+text = "Throw Flare with Left Mouse Button"
 label_settings = SubResource("LabelSettings_jyhfs")
 horizontal_alignment = 1
 

@@ -7,8 +7,7 @@ class_name GameMenu
 @export var title_label: Label
 @export var move_label: Label
 @export var jump_label: Label
-@export var ping_label: Label
-@export var sticky_ping_label: Label
+@export var throw_flare_label: Label
 @export var pause_label: Label
 
 @export var start_button: Button
@@ -23,6 +22,7 @@ var compass_enabled := true
 var message: String
 var exit_enabled := false
 var cancel_enabled := false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -56,8 +56,7 @@ func update(grab_focus := true) -> void:
 		title_label.text = message
 		move_label.visible = false
 		jump_label.visible = false
-		ping_label.visible = false
-		sticky_ping_label.visible = false
+		throw_flare_label.visible = false
 		pause_label.visible = false
 
 		start_button.visible = false
@@ -74,8 +73,7 @@ func update(grab_focus := true) -> void:
 		title_label.text = "Echo Chamber"
 		move_label.visible = true
 		jump_label.visible = true
-		ping_label.visible = true
-		sticky_ping_label.visible = true
+		throw_flare_label.visible = true
 		pause_label.visible = true
 
 		start_button.visible = true
@@ -92,8 +90,7 @@ func update(grab_focus := true) -> void:
 		title_label.text = "Paused"
 		move_label.visible = true
 		jump_label.visible = true
-		ping_label.visible = true
-		sticky_ping_label.visible = true
+		throw_flare_label.visible = true
 		pause_label.visible = true
 
 		start_button.visible = false

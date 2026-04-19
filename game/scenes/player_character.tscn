@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cq7iko6e6hkl8" path="res://scripts/player_character.gd" id="1_agfs1"]
 [ext_resource type="Material" uid="uid://doaqtoc3f68k7" path="res://materials/echo.tres" id="2_rkhd4"]
+[ext_resource type="PackedScene" uid="uid://dhgqm8hfnhqwx" path="res://scenes/flare.tscn" id="3_kww55"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6r27q"]
 friction = 0.0
@@ -9,6 +10,8 @@ friction = 0.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_6r27q"]
 
 [node name="PlayerCharacter" type="RigidBody3D" unique_id=1037529929 node_paths=PackedStringArray("ray_cast", "camera_turner", "camera_pivot")]
+collision_layer = 2
+mass = 100.0
 physics_material_override = SubResource("PhysicsMaterial_6r27q")
 can_sleep = false
 lock_rotation = true
@@ -17,6 +20,7 @@ echo_material = ExtResource("2_rkhd4")
 ray_cast = NodePath("RayCast3D")
 camera_turner = NodePath("CameraTurner")
 camera_pivot = NodePath("CameraTurner/CameraPivot")
+flare_scene = ExtResource("3_kww55")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1168392577]
 shape = SubResource("SphereShape3D_6r27q")

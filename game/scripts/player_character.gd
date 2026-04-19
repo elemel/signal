@@ -4,7 +4,7 @@ class_name PlayerCharacter
 @export var move_speed := 3.0
 @export var move_acceleration := 10.0
 @export var jump_speed := 5.0
-@export var ping_cooldown := 1.0
+@export var flare_cooldown := 1.0
 
 @export var mouse_sensitivity := 0.002
 @export var echo_material: ShaderMaterial
@@ -16,12 +16,15 @@ class_name PlayerCharacter
 @export var camera_turner: Node3D
 @export var camera_pivot: Node3D
 
+@export var flare_scene: PackedScene
+@export var flare_count := 5
+@export var throw_velocity := 10.0
+
 var main: Main
 var pitch := 0.0
-var current_ping_cooldown := 0.0
-var ping_enabled := false
-var sticky_ping_enabled := false
-
+var current_flare_cooldown := 0.0
+var flare_enabled := false
+var flares: Array[Flare]
 
 func _ready() -> void:
 	main = get_tree().get_first_node_in_group("mains")
@@ -39,26 +42,34 @@ func _input(event):
 			camera_pivot.rotation.x = pitch
 
 	if event is InputEventMouseButton:
-		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-			if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
-				sticky_ping_enabled = false
-
-			if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
-				sticky_ping_enabled = not sticky_ping_enabled
-		else:
+		if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-			sticky_ping_enabled = false
 
 
 func _physics_process(delta: float) -> void:
-	current_ping_cooldown -= delta
+	current_flare_cooldown -= delta
 
 	if not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		ping_enabled = true
+		flare_enabled = true
 
-	if (ping_enabled and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or sticky_ping_enabled)  and current_ping_cooldown < 0.0:
-		current_ping_cooldown = ping_cooldown * randf_range(0.9, 1.1)
-		ping()
+	if flare_enabled and current_flare_cooldown < 0.0 and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		var j := 0
+
+		for flare in flares:
+			if is_instance_valid(flare) and flare.is_inside_tree():
+				flares[j] = flare
+				j += 1
+
+		flares.resize(j)
+
+		if flares.size() < flare_count:
+			current_flare_cooldown = flare_cooldown * randf_range(0.9, 1.1)
+			var flare := flare_scene.instantiate() as Flare
+			get_parent().add_child(flare)
+			var side := -1.0 if randi_range(0, 1) == 0 else 1.0
+			flare.global_position = camera_pivot.global_position + camera_pivot.global_transform.basis * Vector3.RIGHT * 0.5 * side * randf_range(0.9, 1.1)
+			flare.linear_velocity = linear_velocity + camera_pivot.global_transform.basis * Vector3.FORWARD * throw_velocity * randf_range(0.9, 1.1)
+			flares.append(flare)
 
 	var collider := ray_cast.get_collider()
 
@@ -81,8 +92,3 @@ func _physics_process(delta: float) -> void:
 		var ground_velocity_correction := ground_velocity_error.limit_length(move_acceleration * delta)
 		var velocity_correction := Vector3(ground_velocity_correction.x, ground_distance_correction, ground_velocity_correction.y)
 		apply_central_impulse(velocity_correction * mass)
-
-
-func ping() -> void:
-	var ping_origin: Vector3 = camera_pivot.global_position
-	main.add_ping(ping_origin, linear_velocity)
