@@ -23,15 +23,23 @@ script = ExtResource("4_pimnq")
 color = Color(1, 0, 0, 1)
 
 [node name="StarPinger" type="Node3D" parent="." unique_id=1341969376]
-transform = Transform3D(0.9604348, 0, 0.27850503, 0, 1, 0, -0.27850503, 0, 0.9604348, -4.8043985, 3.6377888, -9.411556)
+transform = Transform3D(0.9604348, 0, 0.27850503, 0, 1, 0, -0.27850503, 0, 0.9604348, -3.042565, 3.9881887, -7.791348)
 script = ExtResource("4_pimnq")
 
 [node name="StarPinger2" type="Node3D" parent="." unique_id=675677397]
-transform = Transform3D(0.9604348, 0, 0.27850503, 0, 1, 0, -0.27850503, 0, 0.9604348, -5.6689487, 0.6294825, 5.154764)
+transform = Transform3D(0.9604348, 0, 0.27850503, 0, 1, 0, -0.27850503, 0, 0.9604348, -3.2231636, 1.0291245, 4.4827156)
 script = ExtResource("4_pimnq")
 
 [node name="StarPinger3" type="Node3D" parent="." unique_id=501298839]
-transform = Transform3D(0.9604348, 0, 0.27850503, 0, 1, 0, -0.27850503, 0, 0.9604348, 6.0449305, 2.043719, 3.7523537)
+transform = Transform3D(0.9604348, 0, 0.27850503, 0, 1, 0, -0.27850503, 0, 0.9604348, 4.146937, 2.7246404, 3.4677527)
+script = ExtResource("4_pimnq")
+
+[node name="StarPinger4" type="Node3D" parent="." unique_id=1607830473]
+transform = Transform3D(0.9604348, 0, 0.27850503, 0, 1, 0, -0.27850503, 0, 0.9604348, 3.4714975, 3.393634, -4.0650387)
+script = ExtResource("4_pimnq")
+
+[node name="StarPinger5" type="Node3D" parent="." unique_id=301680738]
+transform = Transform3D(0.9604348, 0, 0.27850503, 0, 1, 0, -0.27850503, 0, 0.9604348, 1.3600869, 1.6607356, -9.515229)
 script = ExtResource("4_pimnq")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=776319859]

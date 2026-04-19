@@ -18,6 +18,8 @@ class_name GameMenu
 @export var quit_button: Button
 @export var exit_button: Button
 
+@export var start_level_name := "level_1"
+
 var compass_enabled := true
 var message: String
 var exit_enabled := false
@@ -140,7 +142,7 @@ func resume() -> void:
 
 
 func _on_start_pressed() -> void:
-	main.start_level("level_1")
+	main.start_level(start_level_name)
 	resume()
 
 
